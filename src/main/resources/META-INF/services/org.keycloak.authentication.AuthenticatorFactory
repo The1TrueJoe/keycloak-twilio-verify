@@ -1,1 +1,2 @@
 com.jtelaak.keycloak.TwilioVerifyAuthenticatorFactory
+com.jtelaak.keycloak.TwilioVerifyDirectGrantAuthenticator
