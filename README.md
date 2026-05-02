@@ -58,6 +58,8 @@ export TWILIO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 export TWILIO_VERIFY_SERVICE_SID=VAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
+`TWILIO_VERIFY_AUTH_TOKEN` is also accepted and takes precedence over `TWILIO_AUTH_TOKEN` when both are set.
+
 System property fallbacks are also supported:
 
 - `twilio.accountSid`

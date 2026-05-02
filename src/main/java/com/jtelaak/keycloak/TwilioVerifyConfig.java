@@ -57,7 +57,8 @@ public record TwilioVerifyConfig(
     private static Optional<TwilioVerifyConfig> from(Map<String, String> values, RealmModel realm) {
 
         String accountSid = resolveSecret(values, realm, ACCOUNT_SID, "TWILIO_ACCOUNT_SID", "twilio.accountSid");
-        String authToken = resolveSecret(values, realm, AUTH_TOKEN, "TWILIO_VERIFY_AUTH_TOKEN", "twilio.authToken");
+        String authToken = resolveSecret(values, realm, AUTH_TOKEN,
+                new String[] { "TWILIO_VERIFY_AUTH_TOKEN", "TWILIO_AUTH_TOKEN" }, "twilio.authToken");
         String serviceSid = resolveSecret(values, realm, VERIFY_SERVICE_SID, "TWILIO_VERIFY_SERVICE_SID",
                 "twilio.verifyServiceSid");
 
@@ -91,7 +92,12 @@ public record TwilioVerifyConfig(
 
     private static String resolveSecret(Map<String, String> values, RealmModel realm, String configKey,
             String environmentKey, String propertyKey) {
-        String configured = valueOrNull(values, realm, configKey, environmentKey, propertyKey);
+        return resolveSecret(values, realm, configKey, new String[] { environmentKey }, propertyKey);
+    }
+
+    private static String resolveSecret(Map<String, String> values, RealmModel realm, String configKey,
+            String[] environmentKeys, String propertyKey) {
+        String configured = valueOrNull(values, realm, configKey, environmentKeys, propertyKey);
         return isBlank(configured) ? null : configured.trim();
     }
 
@@ -103,6 +109,11 @@ public record TwilioVerifyConfig(
 
     private static String valueOrNull(Map<String, String> values, RealmModel realm, String key, String environmentKey,
             String propertyKey) {
+        return valueOrNull(values, realm, key, new String[] { environmentKey }, propertyKey);
+    }
+
+    private static String valueOrNull(Map<String, String> values, RealmModel realm, String key, String[] environmentKeys,
+            String propertyKey) {
         String configured = values.get(key);
         if (!isBlank(configured)) {
             return configured;
@@ -113,9 +124,11 @@ public record TwilioVerifyConfig(
             return realmValue;
         }
 
-        String environment = System.getenv(environmentKey);
-        if (!isBlank(environment)) {
-            return environment;
+        for (String environmentKey : environmentKeys) {
+            String environment = System.getenv(environmentKey);
+            if (!isBlank(environment)) {
+                return environment;
+            }
         }
 
         return System.getProperty(propertyKey);
@@ -150,6 +163,6 @@ public record TwilioVerifyConfig(
     }
 
     private static boolean isBlank(String value) {
-        return value == null || value.trim().isEmpty();
+        return value == null || value.trim().isEmpty() || "CHANGE_ME".equalsIgnoreCase(value.trim());
     }
 }
