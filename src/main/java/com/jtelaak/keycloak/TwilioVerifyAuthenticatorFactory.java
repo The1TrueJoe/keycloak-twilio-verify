@@ -60,7 +60,7 @@ public class TwilioVerifyAuthenticatorFactory implements AuthenticatorFactory {
                         "Twilio Account SID. If blank, TWILIO_ACCOUNT_SID or twilio.accountSid is used."),
                 passwordProperty(TwilioVerifyConfig.AUTH_TOKEN,
                         "Twilio Auth Token",
-                        "Twilio Auth Token. If blank, TWILIO_AUTH_TOKEN or twilio.authToken is used."),
+                        "Twilio Auth Token. If blank, TWILIO_VERIFY_AUTH_TOKEN or twilio.authToken is used."),
                 passwordProperty(TwilioVerifyConfig.VERIFY_SERVICE_SID,
                         "Verify Service SID",
                         "Twilio Verify Service SID. If blank, TWILIO_VERIFY_SERVICE_SID or twilio.verifyServiceSid is used."),

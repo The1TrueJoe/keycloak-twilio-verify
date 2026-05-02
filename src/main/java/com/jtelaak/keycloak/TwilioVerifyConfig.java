@@ -40,7 +40,7 @@ public record TwilioVerifyConfig(
         Map<String, String> values = model == null ? Map.of() : model.getConfig();
 
         String accountSid = resolveSecret(values, ACCOUNT_SID, "TWILIO_ACCOUNT_SID", "twilio.accountSid");
-        String authToken = resolveSecret(values, AUTH_TOKEN, "TWILIO_AUTH_TOKEN", "twilio.authToken");
+        String authToken = resolveSecret(values, AUTH_TOKEN, "TWILIO_VERIFY_AUTH_TOKEN", "twilio.authToken");
         String serviceSid = resolveSecret(values, VERIFY_SERVICE_SID, "TWILIO_VERIFY_SERVICE_SID",
                 "twilio.verifyServiceSid");
 
