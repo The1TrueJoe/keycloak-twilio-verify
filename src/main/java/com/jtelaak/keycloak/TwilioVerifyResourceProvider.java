@@ -3,11 +3,11 @@ package com.jtelaak.keycloak;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.services.resource.RealmResourceProvider;
 
-final class TwilioVerifyResourceProvider implements RealmResourceProvider {
+public final class TwilioVerifyResourceProvider implements RealmResourceProvider {
 
     private final KeycloakSession session;
 
-    TwilioVerifyResourceProvider(KeycloakSession session) {
+    public TwilioVerifyResourceProvider(KeycloakSession session) {
         this.session = session;
     }
 

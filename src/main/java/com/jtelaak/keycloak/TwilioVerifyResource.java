@@ -17,13 +17,13 @@ import org.keycloak.models.UserModel;
 import java.util.Map;
 import java.util.Optional;
 
-final class TwilioVerifyResource {
+public final class TwilioVerifyResource {
 
     private static final Logger LOG = Logger.getLogger(TwilioVerifyResource.class);
 
     private final KeycloakSession session;
 
-    TwilioVerifyResource(KeycloakSession session) {
+    public TwilioVerifyResource(KeycloakSession session) {
         this.session = session;
     }
 
